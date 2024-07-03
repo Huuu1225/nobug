@@ -45,7 +45,7 @@ public class Result<T> {
     public Result(boolean success, int code, String msg) {
         this.setSuccess(success);
         this.setCode(code);
-        this.setData(data);
+        this.setMsg(msg);
     }
 
 

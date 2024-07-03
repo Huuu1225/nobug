@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -18,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TeacherAccountController {
     @Autowired
     private JdbcTemplate jdbc;
-    @RequestMapping("/uniLogin")
+    @PostMapping("/uniLogin")
     public Result<Teacheraccount> doLogin(@RequestBody Teacheraccount tea){
 
         System.out.println("接收到的数据:");

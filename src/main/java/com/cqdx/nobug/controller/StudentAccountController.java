@@ -5,6 +5,7 @@ import com.cqdx.nobug.entity.*;
 import com.cqdx.nobug.service.EmailService;
 import com.cqdx.nobug.service.StudentAccountService;
 import com.cqdx.nobug.service.VerificationService;
+import com.cqdx.nobug.temp.Account;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -37,7 +38,7 @@ public class StudentAccountController {
         return "hello";
     }
 
-    @RequestMapping("/uniLogin")
+    @PostMapping("/uniLogin")
     public Result<Studentaccount> doLogin(@RequestBody Studentaccount stu){
 
         System.out.println("接收到的数据:");
