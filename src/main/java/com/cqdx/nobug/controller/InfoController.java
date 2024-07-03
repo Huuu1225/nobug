@@ -55,7 +55,7 @@ public class InfoController {
     }
     //删除学生信息
     @PostMapping("/teacher/deleteStudent")
-    public Result<Studentinfo> deleteStudentInfo(@RequestBody Integer studentid){
+    public Result<Studentinfo> deleteStudentInfo(@RequestParam Integer studentid){
         boolean res = studentInfoService.removeById(studentid);
         if(res) {
             studentAccountService.removeById(studentid);
@@ -66,7 +66,7 @@ public class InfoController {
 
 
     //根据id来查找学生
-    @GetMapping("/teacher/getById")
+    @GetMapping("/getInfoById")
     public Result<Studentinfo> getById(@RequestParam Integer studentid) {
         Studentinfo studentInfo = studentInfoService.getById(studentid);
         if(studentInfo == null)return Result.fail("没有该学生");

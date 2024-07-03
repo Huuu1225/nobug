@@ -35,6 +35,11 @@ public class Result<T> {
         this.setCode(code);
     }
 
+    public Result(boolean success, String msg) {
+        this.setSuccess(success);
+        this.setMsg(msg);
+    }
+
     public Result(boolean success, int code, T data, Integer count) {
         this.setSuccess(success);
         this.setCode(code);
@@ -81,6 +86,9 @@ public class Result<T> {
 
     public static <T> Result<T> fail(String msg) {
         return new Result<T>(false, HttpStatusEnum.INTERNAL_SERVER_ERROR.code(), msg);
+    }
+    public static <T> Result<T> success(String msg) {
+        return new Result<T>(true, msg);
     }
 
 

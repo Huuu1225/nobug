@@ -108,7 +108,7 @@ public class StudentAccountController {
     updateWrapper.eq("StudentId",account.getStudentid()).set("Password",account.getPassword1());
     boolean res=studentAccountService.update(updateWrapper);
     if(res){
-        return Result.success();
+        return Result.success("成功");
     }else {
         return Result.fail("更新失败");
     }
