@@ -6,9 +6,11 @@ import java.io.Serializable;
  * teacheraccount
  * @author 
  */
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 @Data
 public class Teacheraccount {
+    @TableId
     private Integer teacherid;
 
     private Integer password;

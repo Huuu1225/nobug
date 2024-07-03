@@ -6,9 +6,11 @@ import java.io.Serializable;
  * leaveform
  * @author 
  */
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 @Data
 public class Leaveform  {
+    @TableId
     private Integer leaveformid;
 
     private Integer studentid;

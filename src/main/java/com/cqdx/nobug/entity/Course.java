@@ -8,9 +8,11 @@ import java.io.Serializable;
  * course
  * @author 
  */
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 @Data
 public class Course  {
+    @TableId
     private Integer courseid;
 
     private String coursename;

@@ -2,6 +2,8 @@ package com.cqdx.nobug.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cqdx.nobug.entity.*;
 import com.cqdx.nobug.service.EmailService;
 import com.cqdx.nobug.service.StudentAccountService;
@@ -114,8 +116,12 @@ public class StudentAccountController {
     }
 
     }
-    @GetMapping("/getList")
-    public List<Studentaccount> getStudentAccounts(){
-        return studentAccountService.list();
+    @GetMapping("/getListPage")
+    public Result<List<Studentaccount>> getStudentAccounts()
+    {
+        IPage<Studentaccount> page = new Page<>(1, 2);
+        IPage<Studentaccount> stuPage = studentAccountService.page(page); // 调用 page 方法
+        List<Studentaccount> list = stuPage.getRecords();
+        return Result.success(list);
     }
 }

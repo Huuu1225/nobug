@@ -46,21 +46,20 @@ public class Result<T> {
         this.setData(data);
         this.setCount(count);
     }
-
+    public Result(boolean success, int code,  Integer count) {
+        this.setSuccess(success);
+        this.setCode(code);
+        this.setCount(count);
+    }
     public Result(boolean success, int code, String msg) {
         this.setSuccess(success);
         this.setCode(code);
         this.setMsg(msg);
     }
 
+    //请求数据的结果
 
-
-
-    /**
-     * 请求数据的结果
-     */
     private T data;
-
 
     public static <T> Result<T> success() {
         return new Result<T>(true, 200);
@@ -68,6 +67,9 @@ public class Result<T> {
 
     public static <T> Result<T> success(T data, Integer count) {
         return new Result<T>(true, 200, data, count);
+    }
+    public static <T> Result<T> success(Integer count) {
+        return new Result<T>(true, 200,  count);
     }
 
 
