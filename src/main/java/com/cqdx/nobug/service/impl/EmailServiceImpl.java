@@ -1,4 +1,4 @@
-package com.cqdx.nobug.service.iml;
+package com.cqdx.nobug.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 

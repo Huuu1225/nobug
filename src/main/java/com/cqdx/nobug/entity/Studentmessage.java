@@ -6,7 +6,8 @@ import lombok.Data;
 
 @Data
 public class Studentmessage {
-    @TableId(value = "StudentId", type = IdType.AUTO)
+    @TableId(type = IdType.AUTO)
+    private int MessageId;
     private int StudentId;
     private int TeacherId;
     private String StudentMessage;

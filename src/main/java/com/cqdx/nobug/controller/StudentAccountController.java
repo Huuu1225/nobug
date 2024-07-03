@@ -1,13 +1,18 @@
 package com.cqdx.nobug.controller;
 
-import com.cqdx.nobug.entity.Result;
-import com.cqdx.nobug.entity.Studentaccount;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.cqdx.nobug.entity.*;
+import com.cqdx.nobug.service.EmailService;
+import com.cqdx.nobug.service.StudentAccountService;
+import com.cqdx.nobug.service.VerificationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -17,9 +22,15 @@ public class StudentAccountController {
 
     @Autowired
     private JdbcTemplate jdbc;
-//
-//    @Autowired
-//    private StudentAccountService studentAccountService;
+
+    @Autowired
+    private StudentAccountService studentAccountService;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private VerificationService verificationService;
 
     @GetMapping("/hello")
     public String hello(){
@@ -27,22 +38,17 @@ public class StudentAccountController {
     }
 
     @RequestMapping("/uniLogin")
-    public Result doLogin(@RequestBody Studentaccount stu){
+    public Result<Studentaccount> doLogin(@RequestBody Studentaccount stu){
 
-        Result res = new Result();//多
         System.out.println("接收到的数据:");
         System.out.println(stu);
         try {
             Studentaccount tmp = jdbc.queryForObject("select * from studentaccount where StudentId=? and Password=?",new BeanPropertyRowMapper<>(Studentaccount.class),
                     stu.getStudentid(),stu.getPassword());
-            res.setCode(200);
-            res.setResult(tmp);//用户数据放入结果中
-            return res;
+            return Result.success(tmp);//用户数据放入结果中
         } catch (DataAccessException e) {
             e.printStackTrace();
-            res.setCode(201);
-            res.setResult("出现异常"+e.getMessage());//message 异常的信息
-            return res;
+            return  Result.fail(HttpStatusEnum.FORBIDDEN,"出现异常"+e.getMessage());
         }
     }
 //    @PostMapping("/modify")
