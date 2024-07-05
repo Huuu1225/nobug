@@ -68,6 +68,7 @@ public class InfoController {
     //根据id来查找学生
     @GetMapping("/getInfoById")
     public Result<Studentinfo> getById(@RequestParam Integer studentid) {
+        System.out.println("studentid:"+studentid);
         Studentinfo studentInfo = studentInfoService.getById(studentid);
         if(studentInfo == null)return Result.fail("没有该学生");
         return Result.success(studentInfo);

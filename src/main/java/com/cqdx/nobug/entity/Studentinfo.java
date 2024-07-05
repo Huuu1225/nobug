@@ -15,6 +15,8 @@ public class Studentinfo  {
 
     private String name;
 
+    private  String grade;
+
     private String gender;
 
     private String ethnicity;
