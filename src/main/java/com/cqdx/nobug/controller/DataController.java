@@ -225,18 +225,18 @@ public class DataController {
     @GetMapping("/getLeaveFormCount")
     public Result<List<Long>> getLeaveFormCount() {
         List<Long> scoreCounts = new ArrayList<>(2); // 初始化一个大小为10的列表，用于存放每个分数段的人数
+        long count = 0;
         for (int i = 0; i < 2; i++) {
-            long count = 0;
             QueryWrapper<Leaveform> queryWrapper = new QueryWrapper<>();
             switch (i) {
                 case 0:
-                    queryWrapper.eq("Approval", 0);
+                    queryWrapper.eq("approval", 0);
+                    count = leaveFormService.count(queryWrapper);
                     break;
                 case 1:
-                    queryWrapper.eq("Approval", 1);
+                    count=leaveFormService.count()-count;
                     break;
             }
-            count = leaveFormService.count(queryWrapper);
             scoreCounts.add(count);
         }
         // 返回结果

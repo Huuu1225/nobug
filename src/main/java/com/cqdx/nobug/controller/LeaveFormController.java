@@ -1,6 +1,7 @@
 package com.cqdx.nobug.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.cqdx.nobug.entity.Leaveform;
 import com.cqdx.nobug.entity.Result;
 import com.cqdx.nobug.service.LeaveFormService;
@@ -61,6 +62,14 @@ public class LeaveFormController {
     @PostMapping("/deleteLeaveForm")
     public Result deleteLeaveForm(@RequestBody List<Integer> list) {
         leaveFormService.removeByIds(list);
+        return Result.success();
+    }
+    //审批请假
+    @PostMapping("/approvalLeaveForm")
+    public Result approvalLeaveForm( Integer leaveformid, Integer status) {
+        UpdateWrapper<Leaveform> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("leaveformid",leaveformid).set("approval",status);
+        leaveFormService.update(updateWrapper);
         return Result.success();
     }
 

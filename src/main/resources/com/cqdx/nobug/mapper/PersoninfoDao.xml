@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cqdx.nobug.mapper.PersoninfoDao">
+  <resultMap id="BaseResultMap" type="com.cqdx.nobug.entity.Personinfo">
+    <id column="studentid" jdbcType="INTEGER" property="studentid" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="constellation" jdbcType="VARCHAR" property="constellation" />
+    <result column="signature" jdbcType="VARCHAR" property="signature" />
+    <result column="palce" jdbcType="VARCHAR" property="palce" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    studentid, nickname, birthday, constellation, signature, palce
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from personinfo
+    where studentid = #{studentid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from personinfo
+    where studentid = #{studentid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="studentid" keyProperty="studentid" parameterType="com.cqdx.nobug.entity.Personinfo" useGeneratedKeys="true">
+    insert into personinfo (nickname, birthday, constellation, 
+      signature, palce)
+    values (#{nickname,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{constellation,jdbcType=VARCHAR}, 
+      #{signature,jdbcType=VARCHAR}, #{palce,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="studentid" keyProperty="studentid" parameterType="com.cqdx.nobug.entity.Personinfo" useGeneratedKeys="true">
+    insert into personinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="constellation != null">
+        constellation,
+      </if>
+      <if test="signature != null">
+        signature,
+      </if>
+      <if test="palce != null">
+        palce,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="constellation != null">
+        #{constellation,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null">
+        #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="palce != null">
+        #{palce,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cqdx.nobug.entity.Personinfo">
+    update personinfo
+    <set>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="constellation != null">
+        constellation = #{constellation,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null">
+        signature = #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="palce != null">
+        palce = #{palce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where studentid = #{studentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cqdx.nobug.entity.Personinfo">
+    update personinfo
+    set nickname = #{nickname,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      constellation = #{constellation,jdbcType=VARCHAR},
+      signature = #{signature,jdbcType=VARCHAR},
+      palce = #{palce,jdbcType=VARCHAR}
+    where studentid = #{studentid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -55,25 +55,7 @@ public class StudentAccountController {
             return  Result.fail(HttpStatusEnum.FORBIDDEN,"出现异常"+e.getMessage());
         }
     }
-//    @PostMapping("/modify")
-//    public Result<Studentaccount> modify(int StudentId, String Password1, String Password2, Email email, String code){
-//        if(Password1.isEmpty() || Password2.isEmpty()||(!Password1.equals(Password2))){
-//            String msg ="密码为空或两次密码不一致";
-//            return Result.fail(msg);
-//        }
-//        QueryWrapper<Verification> queryWrapper = new QueryWrapper<>();
-//        queryWrapper.select("code") // 选择需要查询的属性
-//                .eq("email", email.getEmail()); // 设置查询条件
-//        Verification verification = verificationService.getOne(queryWrapper);
-//        if (code.equals(verification.getCode())){
-//            Studentaccount stu = new Studentaccount(StudentId, Password1);
-//            studentAccountService.saveOrUpdate(stu);
-//            return Result.success(stu);
-//        }else {
-//            String msg ="验证码错误";
-//            return Result.fail(msg);
-//        }
-//    }
+    //未登录时修改密码，需要通过邮箱验证
     @PostMapping("/modify")
     public Result modify(@RequestBody Account account) {
     // 检查密码是否为空
@@ -116,6 +98,20 @@ public class StudentAccountController {
     }
 
     }
+
+    //登录后修改密码，直接修改
+    @PostMapping("/modify2")
+    public Result modify2(@RequestParam Integer studentid,@RequestParam String password) {
+        UpdateWrapper<Studentaccount> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("StudentId",studentid).set("Password",password);
+        if(studentAccountService.update(updateWrapper)){
+            return Result.success("成功");
+        }else {
+            return Result.fail("更新失败");
+        }
+
+    }
+
     @GetMapping("/getListPage")
     public Result<List<Studentaccount>> getStudentAccounts()
     {

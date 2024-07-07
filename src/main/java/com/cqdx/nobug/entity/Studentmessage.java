@@ -6,11 +6,11 @@ import lombok.Data;
 
 @Data
 public class Studentmessage {
-    @TableId(type = IdType.AUTO)
+    @TableId(value = "StudentId", type = IdType.AUTO)
     private int MessageId;
     private int StudentId;
     private int TeacherId;
-    private String StudentMessage;
+    private String  StudentMessage;
     private String TeacherMessage;
 
 }

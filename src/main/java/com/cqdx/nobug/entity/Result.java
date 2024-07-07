@@ -28,25 +28,22 @@ public class Result<T> {
     private String msg;
 
     /*总条数*/
-    private Integer count;
+    private long count;
 
     public Result(boolean success, int code) {
         this.setSuccess(success);
         this.setCode(code);
     }
 
-    public Result(boolean success, String msg) {
-        this.setSuccess(success);
-        this.setMsg(msg);
-    }
 
-    public Result(boolean success, int code, T data, Integer count) {
+
+    public Result(boolean success, int code, T data, long count) {
         this.setSuccess(success);
         this.setCode(code);
         this.setData(data);
         this.setCount(count);
     }
-    public Result(boolean success, int code,  Integer count) {
+    public Result(boolean success, int code,  long count) {
         this.setSuccess(success);
         this.setCode(code);
         this.setCount(count);
@@ -65,16 +62,16 @@ public class Result<T> {
         return new Result<T>(true, 200);
     }
 
-    public static <T> Result<T> success(T data, Integer count) {
+    public static <T> Result<T> success(T data, long count) {
         return new Result<T>(true, 200, data, count);
     }
-    public static <T> Result<T> success(Integer count) {
+    public static <T> Result<T> success(long count) {
         return new Result<T>(true, 200,  count);
     }
 
 
     public static <T> Result<T> success(T data) {
-        return new Result<T>(true, 200, data, null);
+        return new Result<T>(true, 200, data, 0);
     }
 
 
@@ -90,7 +87,7 @@ public class Result<T> {
         return new Result<T>(false, HttpStatusEnum.INTERNAL_SERVER_ERROR.code(), msg);
     }
     public static <T> Result<T> success(String msg) {
-        return new Result<T>(true, msg);
+        return new Result<T>(true, 200,msg);
     }
 
 
