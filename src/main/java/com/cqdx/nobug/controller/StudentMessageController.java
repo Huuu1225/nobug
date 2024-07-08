@@ -11,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -45,8 +46,9 @@ public class StudentMessageController {
 //    }
     @GetMapping("/getStudentMessagesByStudentId/{StudentId}")
     public Result<List<Studentmessage>> getStudentMessagesByStudentId(@PathVariable("StudentId") Integer StundetId) {
-            List<Studentmessage> studentmessages = studentMessageService.getMessagebyStudentId(StundetId);
-            return Result.success(studentmessages);
+        List<Studentmessage> studentmessages = studentMessageService.getMessagebyStudentId(StundetId);
+        Collections.reverse(studentmessages);
+        return Result.success(studentmessages);
     }
     //根据老师id查找学生留言及教师留言
     @GetMapping("/getStudentMessageByTeacherId/{TeacherId}")

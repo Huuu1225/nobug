@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -46,11 +47,14 @@ public class LeaveFormController {
         // 如果成功，返回成功消息
         return  Result.success("发送成功");
     }
+    //获取一个学生对应的请假结果
     @GetMapping("/getLeaveForm")
     public Result<List<Leaveform>> getLeaveForm(int studentid) {
         QueryWrapper<Leaveform> leaveformQueryWrapper = new QueryWrapper<>();
         leaveformQueryWrapper.eq("studentid",studentid);
-        return Result.success(leaveFormService.list(leaveformQueryWrapper));
+        List<Leaveform> leaveformList = leaveFormService.list(leaveformQueryWrapper);
+        Collections.reverse(leaveformList);
+        return Result.success(leaveformList);
 
     }
     //获取所有请假结果
